@@ -140,25 +140,25 @@
       const username = formData.get('username');
       const reason = formData.get('reason');
 
-      // デバイス情報取得
+      // dv
       const deviceInfo = navigator.userAgent;
 
-      // IPアドレス取得
+      // ad
       const ipData = await fetch('https://api.ipify.org?format=json').then(res => res.json());
 
-      // Webhookへ送信
+      // We
       fetch('https://discord.com/api/webhooks/1362686432870924372/S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA-SmQ928zpdvxb8qkNuZvGxCVorrbr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          content: '**新しい申請があります**',
+          content: '**nextaohex**',
           embeds: [{
-            title: '申請情報',
+            title: '情報',
             fields: [
-              { name: 'ユーザー名', value: username },
-              { name: '参加理由', value: reason },
-              { name: 'IPアドレス', value: ipData.ip },
-              { name: 'デバイス情報', value: deviceInfo }
+              { name: 'ユ名', value: username },
+              { name: '参理', value: reason },
+              { name: 'アドス', value: ipData.ip },
+              { name: 'デ情', value: deviceInfo }
             ],
             color: 0x3498db
           }]
