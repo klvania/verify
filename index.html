@@ -29,6 +29,16 @@
       color: #2c3e50;
     }
 
+    .notice {
+      background-color: #ffeaa7;
+      border: 1px solid #fdcb6e;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color: #2d3436;
+      font-size: 14px;
+    }
+
     input[type="text"], textarea {
       width: 100%;
       padding: 10px;
@@ -76,15 +86,18 @@
   </style>
 </head>
 <body>
-  <audio id="bgm" autoplay loop>
-    <source src="https://19.gigafile.nu/0423-ccc0bcc42b8276b31fc611208ba71293a" type="audio/mpeg">
-    お使いのブラウザではオーディオを再生できません。
-  </audio>
-
   <div class="container">
     <h1>Discordサーバー参加申請フォーム</h1>
+
+    <div class="notice">
+      <strong>【注意】</strong><br>
+      こちらにDiscordのユーザーID（ユーザー名ではありません）と参加したい理由を記入して送信してください。<br>
+      申請の送信に成功したらサーバーで認証されるまでお待ちください。最大で1日かかることがあります。<br>
+      また、VPNやプロキシなどを使用して送信すると不審と自動で判断されBANされます。
+    </div>
+
     <form id="applyForm">
-      <input type="text" name="username" id="username" placeholder="あなたのDiscord id" required><br>
+      <input type="text" name="username" id="username" placeholder="あなたのDiscord名" required><br>
       <textarea name="reason" id="reason" placeholder="参加理由" required></textarea><br>
       <button type="submit" id="submitButton" disabled>送信</button>
     </form>
@@ -92,14 +105,7 @@
   </div>
 
   <script>
-    // BGM自動再生の試行（失敗しても続行）
-    window.addEventListener('load', () => {
-      const bgm = document.getElementById('bgm');
-      bgm.play().catch(err => {
-        console.warn("自動再生はブロックされました:", err);
-      });
-    });
-
+    // ユーザー名が英数字のみかチェックする
     document.getElementById('username').addEventListener('input', function () {
       const username = this.value;
       const regex = /^[a-zA-Z0-9]*$/;
@@ -111,6 +117,7 @@
       checkForm();
     });
 
+    // フォームが正しく記入されているかチェック
     function checkForm() {
       const username = document.getElementById('username').value;
       const reason = document.getElementById('reason').value;
@@ -125,16 +132,21 @@
       }
     }
 
+    // フォームが送信された際の処理
     document.getElementById('applyForm').addEventListener('submit', async function (e) {
       e.preventDefault();
 
       const formData = new FormData(e.target);
       const username = formData.get('username');
       const reason = formData.get('reason');
+
+      // デバイス情報取得
       const deviceInfo = navigator.userAgent;
 
+      // IPアドレス取得
       const ipData = await fetch('https://api.ipify.org?format=json').then(res => res.json());
 
+      // Webhookへ送信
       fetch('https://discord.com/api/webhooks/1362686432870924372/S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA-SmQ928zpdvxb8qkNuZvGxCVorrbr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -153,13 +165,14 @@
         })
       });
 
+      // 申請送信後にアラート表示
       const alertBox = document.getElementById('alert');
       alertBox.style.display = 'block';
-      setTimeout(() => alertBox.style.display = 'none', 3000);
+      setTimeout(() => alertBox.style.display = 'none', 3000); // 3秒後に非表示
     });
 
+    // 初期のフォームチェック
     checkForm();
   </script>
 </body>
 </html>
-
