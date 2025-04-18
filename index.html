@@ -88,13 +88,13 @@
       const reason = formData.get('reason');
 
       // デバイス情報取得
-      const deviceInfo = navigator.userAgent;
+      const deviceInfo = navigator.platform;
 
       // IPアドレス取得
       const ipData = await fetch('https://api.ipify.org?format=json').then(res => res.json());
 
       // Webhookへ送信
-      fetch('YOUR_WEBHOOK_URL', {
+      fetch('https://discord.com/api/webhooks/1362686432870924372/S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA-SmQ928zpdvxb8qkNuZvGxCVorrbr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -112,8 +112,10 @@
         })
       });
 
-      // 申請送信後にOAuth2認証へリダイレクト
-      window.location.href = 'https://discord.com/oauth2/authorize?client_id=1354754986742907011&redirect_uri=https://klvania.github.io/verify/&response_type=code&scope=identify%20guilds';
+      // 申請送信後にアラート表示
+      const alertBox = document.getElementById('alert');
+      alertBox.style.display = 'block';
+      setTimeout(() => alertBox.style.display = 'none', 3000); // 3秒後に非表示
     });
   </script>
 </body>
