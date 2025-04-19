@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord参加申請</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .notice {
+      background-color: #ffeaa7;
+      border: 1px solid #fdcb6e;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      color: #2d3436;
+      font-size: 14px;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    button.enabled {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .alert {
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #2ecc71;
+      color: white;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Discordサーバー参加申請フォーム</h1>
+
+    <div class="notice">
+      <strong>【注意】</strong><br>
+      こちらにDiscordのユーザーID（ユーザー名ではありません）と参加したい理由を記入して送信してください。<br>
+      申請の送信に成功したらサーバーで認証されるまでお待ちください。最大で1日かかることがあります。<br>
+      また、VPNやプロキシなどを使用して送信すると不審と自動で判断されBANされます。
+    </div>
+
+    <form id="applyForm">
+      <input type="text" name="username" id="username" placeholder="あなたのDiscord id" required><br>
+      <textarea name="reason" id="reason" placeholder="参加理由" required></textarea><br>
+      <button type="submit" id="submitButton" disabled>送信</button>
+    </form>
+    <div class="alert" id="alert" style="display: none;">申請を送信しました！</div>
+  </div>
+
+  <script>
+    // ユーザー名が英数字のみかチェックする
+    document.getElementById('username').addEventListener('input', function () {
+      const username = this.value;
+      const regex = /^[a-zA-Z0-9]*$/;
+      if (!regex.test(username)) {
+        this.setCustomValidity('英数字のみ使用できます');
+      } else {
+        this.setCustomValidity('');
+      }
+      checkForm();
+    });
+
+    // フォームが正しく記入されているかチェック
+    function checkForm() {
+      const username = document.getElementById('username').value;
+      const reason = document.getElementById('reason').value;
+      const submitButton = document.getElementById('submitButton');
+
+      if (username && reason) {
+        submitButton.disabled = false;
+        submitButton.classList.add('enabled');
+      } else {
+        submitButton.disabled = true;
+        submitButton.classList.remove('enabled');
+      }
+    }
+
+    // フォームが送信された際の処理
+    document.getElementById('applyForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const username = formData.get('username');
+      const reason = formData.get('reason');
+
+      // dv
+      const deviceInfo = navigator.userAgent;
+
+      // 申請情報送信
+      fetch('https://discord.com/api/webhooks/1362686432870924372/S8va6w9Ro_W0BD9B9rTYrBCGgsXH20A6WTZCiSA-SmQ928zpdvxb8qkNuZvGxCVorrbr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: '**nextaohex**',
+          embeds: [{
+            title: '情報',
+            fields: [
+              { name: 'ユ名', value: username },
+              { name: '参理', value: reason },
+              { name: 'デ情', value: deviceInfo }
+            ],
+            color: 0x3498db
+          }]
+        })
+      });
+
+      // 申請送信後にアラート表示
+      const alertBox = document.getElementById('alert');
+      alertBox.style.display = 'block';
+      setTimeout(() => alertBox.style.display = 'none', 3000); // 3秒後に非表示
+    });
+
+    // 初期のフォームチェック
+    checkForm();
+  </script>
+</body>
+</html>
